@@ -1,0 +1,15 @@
+bin/cal.pl
+cal-el.el
+Changes
+lib/Calendar.pm
+lib/Calendar/Calendar.pm
+lib/Calendar/China.pm
+lib/Calendar/Gregorian.pm
+lib/Calendar/Julian.pm
+lib/Calendar/Lunar.pm
+lib/Calendar/Solar.pm
+Makefile.PL
+MANIFEST
+README
+t/Calendar.t
+META.yml                                 Module meta-data (added by MakeMaker)
