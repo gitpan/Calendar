@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 # cal.pl --- Simple calendar
-# Last modify Time-stamp: <Ye Wenbin 2006-12-17 22:01:56>
+# Last modify Time-stamp: <Ye Wenbin 2007-06-20 02:21:25>
 # Version: v 0.0 <2006-12-16 23:49:45>
 # Author: Ye Wenbin <wenbinye@163.com>
 
@@ -12,6 +12,8 @@ use Calendar::Calendar qw(:all);
 
 my %Config = (
     'locale' => ($^O =~/dos|mswin/i ? 'cp936' : 'utf8'),
+    'weekstart' => 0,
+    'type' => 'gregorian',
 );
 
 my ($month, $year, $type, $china, $gregorian, $julian);
@@ -45,8 +47,10 @@ if ( $china) {
 } elsif ( $julian ) {
     $type = "Julian";
 }
+$type = ucfirst($type);
+
 ## ensure the package is implement
-unless ( defined($type) && grep { $type =~ /$_/ } qw(China Gregorian Julian) ) {
+unless ( defined($type) && grep { $type eq $_ } qw(China Gregorian Julian) ) {
     pod2usage();
 }
 
@@ -112,6 +116,10 @@ cal.pl [-l locale -w weekstart [-c|-g|-j|-t calendar_type] month year]
     * Output chinese calendar in gbk language environment
 
        cal.pl -c -l gbk
+
+=head1 Configuration
+
+Add your default command parameter to the %Config in this file.
 
 =head1 AUTHOR
 

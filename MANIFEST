@@ -1,6 +1,6 @@
 bin/cal.pl
 cal-el.el
-Changes
+ChangeLog
 lib/Calendar.pm
 lib/Calendar/Calendar.pm
 lib/Calendar/China.pm

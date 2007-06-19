@@ -1,5 +1,5 @@
 # Calendar.pm --- 
-# Last modify Time-stamp: <Ye Wenbin 2006-12-17 21:14:57>
+# Last modify Time-stamp: <Ye Wenbin 2007-06-20 02:34:30>
 # Version: v 0.0 <2006-12-15 14:37:46>
 # Author: Ye Wenbin <wenbinye@163.com>
 
@@ -15,7 +15,7 @@ use overload
     '0+' => \&absolute_date;
 
 use vars qw($VERSION);
-$VERSION="0.01";
+$VERSION="0.02";
 
 sub new {
     my $_class = shift;

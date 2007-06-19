@@ -1,5 +1,5 @@
 # Julian.pm --- 
-# Last modify Time-stamp: <Ye Wenbin 2006-12-17 18:53:27>
+# Last modify Time-stamp: <Ye Wenbin 2007-06-20 02:11:14>
 # Version: v 0.0 <2006-12-15 16:55:47>
 # Author: Ye Wenbin <wenbinye@163.com>
 
@@ -8,6 +8,7 @@ use strict;
 use warnings;
 use Calendar;
 use POSIX;
+use Carp;
 require Exporter;
 our @ISA = qw(Calendar Exporter);
 our %EXPORT_TAGS = ( 'all' => [ qw(
@@ -81,6 +82,7 @@ sub absolute_date {
     if ( exists $self->{absolute} ) {
         return $self->{absolute};
     }
+    $self->check_date();
     $self->{absolute} = _absoulte_date($self->month, $self->day, $self->year);
 }
 
@@ -99,9 +101,24 @@ sub last_day_of_month {
     return _last_day_of_month($self->month, $self->year);
 }
 
+sub check_date {
+    my $self = shift;
+    if ( $self->year == 0 ) {
+        croak('Not a valid year: should not be zero in ' . ref $self);
+    }
+    if ( $self->month < 1 || $self->month > 12 ) {
+        croak(sprintf('Not a valid month %d: should from 1 to 12 in %s', $self->month, ref $self));
+    }
+    if ( $self->day < 1 || $self->day > $self->last_day_of_month() ) {
+        croak(sprintf('Not a valid day %d: should from 1 to %d in %d, %d in %s',
+                      $self->day, $self->last_day_of_month, $self->month, $self->year, ref $self));
+    }
+}
+
 #==========================================================
 # Private functions
 #==========================================================
+
 sub _absoulte_date {
     my ($month, $day, $year) = @_;
     int(_day_of_year($month, $day, $year) + 365*($year-1) + ($year-1)/4 -2);

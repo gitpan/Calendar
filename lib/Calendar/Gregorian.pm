@@ -1,5 +1,5 @@
 # Gregorian.pm --- 
-# Last modify Time-stamp: <Ye Wenbin 2006-12-17 20:45:16>
+# Last modify Time-stamp: <Ye Wenbin 2007-06-20 02:06:34>
 # Version: v 0.0 <2006-12-15 14:46:59>
 # Author: Ye Wenbin <wenbinye@163.com>
 
@@ -84,10 +84,9 @@ sub absolute_date {
     if ( exists $self->{absolute} ) {
         return $self->{absolute};
     }
+    $self->check_date();
     my $year = $self->year;
-    if ( !defined $year || $year == 0 ) {
-        die "There was no year zero!\n";
-    } elsif ( $year > 0 ) {
+    if ( $year > 0 ) {
         my $offset = $year -1;
         $self->{absolute} = $self->day_of_year + 365*$offset + $offset/4 - $offset/100 + $offset/400;
     } else {
@@ -95,7 +94,6 @@ sub absolute_date {
         $self->{absolute} = -($self->day_of_year + 365*$offset + $offset/4 - $offset/100 + $offset/400 + _day_of_year(12, 31, -1));
     }
 }
-
 
 sub is_leap_year {
     return _is_leap_year(shift->year);

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # China.pm --- 
-# Last modify Time-stamp: <Ye Wenbin 2006-12-17 19:22:02>
+# Last modify Time-stamp: <Ye Wenbin 2007-06-20 02:13:27>
 # Version: v 0.0 <2006-12-15 23:57:01>
 # Author: Ye Wenbin <wenbinye@163.com>
 
@@ -41,6 +41,7 @@ sub absolute_date {
     if (exists $self->{absolute} ) {
         return $self->{absolute};
     }
+    $self->check_date();
     my ($cycle, $year, $month, $day) = ($self->{cycle}, $self->{year},
                                         $self->{month}, $self->{day});
     my $gyear = 60*($cycle-1)+$year-1-2636;
@@ -117,6 +118,20 @@ sub timezone {
 
 sub next_jieqi_date {
     Calendar::Solar::next_longitude_date($_[0], 15, $_[1]);
+}
+
+sub check_date {
+    my $self = shift;
+    if ( $self->year < 1 || $self->year > 60 ) {
+        croak('Not a valid year: should not from 1 to 60 in ' . ref $self);
+    }
+    if ( $self->month < 1 || $self->month > 12 ) {
+        croak(sprintf('Not a valid month %d: should from 1 to 12 in %s', $self->month, ref $self));
+    }
+    if ( $self->day < 1 || $self->day > $self->last_day_of_month() ) {
+        croak(sprintf('Not a valid day %d: should from 1 to %d in %d, %d in %s',
+                      $self->day, $self->last_day_of_month, $self->month, $self->year, ref $self));
+    }
 }
 
 #==========================================================
@@ -391,7 +406,10 @@ Calendar::China - Perl extension for Chinese calendar
 =head1 SYNOPSIS
 
    use Calendar;
-   my $date = Calendar->new_from_China(1, 1, 2006);
+   my $date = Calendar->new_from_China(78, 22, 12, 2);
+
+   or construct from Gregorian:
+   my $date = Calendar->new_from_Gregorian(1, 1, 2006)->convert_to_China();
 
 =head1 DESCRIPTION
 
