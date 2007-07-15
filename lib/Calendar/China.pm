@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # China.pm --- 
-# Last modify Time-stamp: <Ye Wenbin 2007-06-20 02:13:27>
+# Last modify Time-stamp: <Ye Wenbin 2007-07-13 10:47:25>
 # Version: v 0.0 <2006-12-15 23:57:01>
 # Author: Ye Wenbin <wenbinye@163.com>
 
@@ -41,12 +41,13 @@ sub absolute_date {
     if (exists $self->{absolute} ) {
         return $self->{absolute};
     }
-    $self->check_date();
     my ($cycle, $year, $month, $day) = ($self->{cycle}, $self->{year},
                                         $self->{month}, $self->{day});
     my $gyear = 60*($cycle-1)+$year-1-2636;
     my $monthday = _assoc_month($month, [_memq_month(1, _year($gyear)), @{_year($gyear+1)}]);
     $self->{absolute} = $day-1+$monthday->[1];
+    $self->check_date();
+    return $self->{absolute};
 }
 
 sub from_absolute {

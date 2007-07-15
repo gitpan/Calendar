@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 # cal.pl --- Simple calendar
-# Last modify Time-stamp: <Ye Wenbin 2007-06-20 02:21:25>
+# Last modify Time-stamp: <Ye Wenbin 2007-07-14 14:31:03>
 # Version: v 0.0 <2006-12-16 23:49:45>
 # Author: Ye Wenbin <wenbinye@163.com>
 
@@ -9,9 +9,10 @@ use warnings;
 use Pod::Usage;
 use Getopt::Long qw(:config auto_help);
 use Calendar::Calendar qw(:all);
+use I18N::Langinfo;
 
 my %Config = (
-    'locale' => ($^O =~/dos|mswin/i ? 'cp936' : 'utf8'),
+    'locale' => langinfo(I18N::Langinfo::CODESET()),
     'weekstart' => 0,
     'type' => 'gregorian',
 );

@@ -1,5 +1,5 @@
 # Calendar.pm --- 
-# Last modify Time-stamp: <Ye Wenbin 2007-06-20 02:34:30>
+# Last modify Time-stamp: <Ye Wenbin 2007-07-15 19:01:00>
 # Version: v 0.0 <2006-12-15 14:37:46>
 # Author: Ye Wenbin <wenbinye@163.com>
 
@@ -15,7 +15,7 @@ use overload
     '0+' => \&absolute_date;
 
 use vars qw($VERSION);
-$VERSION="0.02";
+$VERSION="0.03";
 
 sub new {
     my $_class = shift;
@@ -162,7 +162,7 @@ Calendar - Perl extension for calendar convertion
    print $date->date_string("Gregorian date: %M %W %d %Y"), "\n";
 
    my $newdate = $date + 7;
-   print $date->date_string("Gregorian date of next week: %D"), "\n";
+   print $newdate->date_string("Gregorian date of next week: %D"), "\n";
    
    $newdate = $date-7;
    print $newdate->date_string("Absolute date of last week: %A\n");

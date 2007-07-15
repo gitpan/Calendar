@@ -1,3 +1,15 @@
+2007-07-15  Ye Wenbin  <wenbinye@163.com>
+
+	* lib/Calendar.pm: update version number to upload to PAUSE.
+
+2007-07-14  Ye Wenbin  <wenbinye@163.com>
+
+	* lib/Calendar.pm: Fix A typo error. Thanks to Chihiro Fukazawa!
+
+2007-07-13  Ye Wenbin  <wenbinye@163.com>
+
+	* lib/Calendar/China.pm (absolute_date): Fix deep recursive when call this function.
+
 2007-06-20  Ye Wenbin  <wenbinye@163.com>
 
 	* lib/Calendar/Gregorian.pm (absolute_date): Validate parameter
