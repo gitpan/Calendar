@@ -1,5 +1,4 @@
 # Calendar.pm --- 
-# Last modify Time-stamp: <Ye Wenbin 2007-07-15 19:01:00>
 # Version: v 0.0 <2006-12-15 14:37:46>
 # Author: Ye Wenbin <wenbinye@163.com>
 
@@ -15,7 +14,7 @@ use overload
     '0+' => \&absolute_date;
 
 use vars qw($VERSION);
-$VERSION="0.03";
+$VERSION="0.04";
 
 sub new {
     my $_class = shift;
@@ -285,8 +284,10 @@ For chinese calendar, the following specifications are available:
    %S       sexagesimal name, eg. "丙戌"
    %D       day name, eg. "初二"
    %Z       zodiac name, eg. "狗"
-   %m       month name in chinese, eg. "十一月"
+   %M       month name in chinese, eg. "十一月"
    %W       week day name in chinese, eg. "星期一"
+
+Meanwhile, %Y, %m and %d now stand for Gregorian year, month and day.
 
 =head2 Other method
 

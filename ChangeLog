@@ -1,3 +1,9 @@
+2007-12-11  Ye Wenbin  <wenbinye@gmail.com>
+
+	* lib/Calendar.pm: update version for distribution
+
+	* Makefile.PL: Remove restriction of perl version
+
 2007-07-15  Ye Wenbin  <wenbinye@163.com>
 
 	* lib/Calendar.pm: update version number to upload to PAUSE.
