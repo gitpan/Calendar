@@ -27,16 +27,16 @@
  "gregorian"
  '(1 1 1900)
  (* 365 200)
- "cal")
+ "cal-el")
 
 (ywb-create-cal-data
  "julian"
  '(1 1 1900)
  (* 365 200)
- "cal")
+ "cal-el")
 
 (ywb-create-cal-data
  "chinese"
  '(1 1 1900)
  (* 365 200)
- "cal")
+ "cal-el")

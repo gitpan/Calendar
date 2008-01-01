@@ -14,7 +14,7 @@ use overload
     '0+' => \&absolute_date;
 
 use vars qw($VERSION);
-$VERSION="0.04";
+use version; our $VERSION=qv("0.4.1");
 
 sub new {
     my $_class = shift;
@@ -109,33 +109,30 @@ sub add {
 #}}}
 
 sub AUTOLOAD {
-    use vars qw($AUTOLOAD);
+    our ($AUTOLOAD);
     if ( $AUTOLOAD =~ /::new_from_(\w+)/ ) {
         my $self = shift;
-        my $module = $1;
-        my $code = <<CODE;
-require Calendar::$module;
-Calendar::$module->new(\@_);
-CODE
-
-        $self = eval $code;
+        my $module = "Calendar::" . $1;
+        eval(require $module);
         if ( $@ ) {
-            die "Can't load module Calendar::$module: $@!\n"
+            die "Can't load module $module: $@!\n"
         }
-        return $self;
+        my $sub = *{__PACKAGE__."::$AUTOLOAD"} = sub {
+            return $module->new(@_);
+        };
+        goto &$sub;
     }
     elsif ( $AUTOLOAD =~ /::convert_to_(\w+)/ ) {
-        my $self = \$_[0];
-        my $module = $1;
-        my $code = <<CODE;
-require Calendar::$module;
-Calendar::$module->new(\$\$self->absolute_date);
-CODE
-        $$self = eval $code;
+        my $module = "Calendar::" . $1;
+        eval{require $module};
         if ( $@ ) {
-            die "Can't load module Calendar::$module: $@!\n"
+            die "Can't load module $module: $@!\n"
         }
-        return $$self;
+        my $sub = *{__PACKAGE__."::$AUTOLOAD"} = sub {
+            $_[0] = $module->new($_[0]->absolute_date);
+            return $_[0];
+        };
+        goto &$sub;
     }
     elsif ( $AUTOLOAD =~ /::(year|month|day)/ ) {
         my $self = shift;
@@ -275,7 +272,7 @@ specifications as following:
    %d       numeric day of the month, with leading zeros (eg 01..31)
    %D       MM/DD/YY
    %m       month number, with leading zeros (eg 01..31)
-   %M       month numer
+   %M       month name
    %W       day of the week
    %Y       year
 

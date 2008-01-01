@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w -I../lib
+#!/usr/bin/perl -w -I../blib/arch -I../blib/lib -Iblib/arch -Iblib/lib
 # Before `make install' is performed this script should be runnable with
 # `make test'. After `make install' it should work as `perl Calendar.t'
 
@@ -36,7 +36,7 @@ ok($date->cycle==78&&$date->year==22&&$date->month==12&&$date->day==2,
 
 #{{{  Test function constructor: from absolute and from [month, day,year]
 #     should equal in absolute date
-my $skip_convertion = 0;
+my $skip_convertion = 1;
 unless ( $skip_convertion ) {
     diag("Test convetion for twenty years. This may take a long time...");
     my $start_year = 1990;

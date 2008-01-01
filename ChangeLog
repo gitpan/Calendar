@@ -1,3 +1,8 @@
+2008-01-01  Ye Wenbin  <wenbinye@gmail.com>
+
+	* lib/Calendar.pm (AUTOLOAD): Generate new_from_pacakge and
+	convert_to_package functions, not eval everytime.
+
 2007-12-11  Ye Wenbin  <wenbinye@gmail.com>
 
 	* lib/Calendar.pm: update version for distribution

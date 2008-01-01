@@ -1,5 +1,7 @@
 bin/cal.pl
-cal-el.el
+Build.PL
+cal-test.el
+cal-test.pl
 ChangeLog
 lib/Calendar.pm
 lib/Calendar/Calendar.pm
@@ -9,7 +11,7 @@ lib/Calendar/Julian.pm
 lib/Calendar/Lunar.pm
 lib/Calendar/Solar.pm
 Makefile.PL
-MANIFEST
+MANIFEST			This list of files
+META.yml
 README
 t/Calendar.t
-META.yml                                 Module meta-data (added by MakeMaker)
