@@ -1,5 +1,5 @@
 # Lunar.pm --- 
-# Last modify Time-stamp: <Ye Wenbin 2006-12-17 17:57:10>
+# Last modify Time-stamp: <Ye Wenbin 2008-01-28 13:25:23>
 # Version: v 0.0 <2006-12-15 22:23:25>
 # Author: Ye Wenbin <wenbinye@163.com>
 
@@ -34,7 +34,7 @@ sub new_moon_date {
         $date = Calendar->new_from_Gregorian( ref $d ? $d->absolute_date : $d);
     }
     $d = $date->astro_date();
-    my $year = $date->year + $date->day_number / 365.25;
+    my $year = $date->year + $date->day_of_year / 365.25;
     my $k = floor(($year-2000)*12.3685);
     # print $k, "\n";
     $date = _new_moon_time($k, $tz);

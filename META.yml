@@ -1,6 +1,6 @@
 ---
 name: Calendar
-version: v0.4.1
+version: v0.4.2
 author:
   - 'Ye Wenbin <wenbinye@gmail.com>'
 abstract: Perl extension for calendar convertion
@@ -15,7 +15,7 @@ provides:
       version:
         - 0
         - 4
-        - 1
+        - 2
   Calendar::Calendar:
     file: lib/Calendar/Calendar.pm
   Calendar::China:

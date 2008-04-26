@@ -14,7 +14,7 @@ use overload
     '0+' => \&absolute_date;
 
 use vars qw($VERSION);
-use version; our $VERSION=qv("0.4.1");
+use version; our $VERSION=qv("0.4.2");
 
 sub new {
     my $_class = shift;
@@ -109,37 +109,45 @@ sub add {
 #}}}
 
 sub AUTOLOAD {
+    no strict 'refs';
     our ($AUTOLOAD);
     if ( $AUTOLOAD =~ /::new_from_(\w+)/ ) {
-        my $self = shift;
+        my $subname = "Calendar::new_from_" . $1;
         my $module = "Calendar::" . $1;
-        eval(require $module);
+        eval("require $module");
         if ( $@ ) {
             die "Can't load module $module: $@!\n"
         }
-        my $sub = *{__PACKAGE__."::$AUTOLOAD"} = sub {
+        my $sub = *{$subname} = sub {
+            my $self = shift;
             return $module->new(@_);
         };
         goto &$sub;
     }
     elsif ( $AUTOLOAD =~ /::convert_to_(\w+)/ ) {
+        my $subname = "Calendar::convert_to_" . $1;
         my $module = "Calendar::" . $1;
-        eval{require $module};
+        eval("require $module");
         if ( $@ ) {
             die "Can't load module $module: $@!\n"
         }
-        my $sub = *{__PACKAGE__."::$AUTOLOAD"} = sub {
+        my $sub = *{$subname} = sub {
             $_[0] = $module->new($_[0]->absolute_date);
             return $_[0];
         };
         goto &$sub;
     }
-    elsif ( $AUTOLOAD =~ /::(year|month|day)/ ) {
+    elsif ( $AUTOLOAD =~ /::(year|month|day)$/ ) {
         my $self = shift;
         if ( exists $self->{$1} ) {
             return $self->{$1};
         }
         return;
+    }
+    elsif ( $AUTOLOAD =~ /DESTROY/) {
+    }
+    else {
+        die "Unknown function $AUTOLOAD\n";
     }
 }
 

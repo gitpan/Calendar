@@ -7,7 +7,9 @@
 # change 'tests => 1' to 'tests => last_test_to_print';
 
 use Test::More 'no_plan';
-BEGIN { use_ok('Calendar') };
+BEGIN {
+    use_ok('Calendar');
+}
 
 #########################
 
@@ -36,7 +38,7 @@ ok($date->cycle==78&&$date->year==22&&$date->month==12&&$date->day==2,
 
 #{{{  Test function constructor: from absolute and from [month, day,year]
 #     should equal in absolute date
-my $skip_convertion = 1;
+my $skip_convertion = 0;
 unless ( $skip_convertion ) {
     diag("Test convetion for twenty years. This may take a long time...");
     my $start_year = 1990;
